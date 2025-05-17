@@ -5,10 +5,134 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@inversifyjs/common@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@inversifyjs/common@npm:1.5.0"
+  checksum: 3f4e484e45522684c0565399a4e4dc3fbd24133ee2405e6b8970e3188e3073765ae73331f3b0dd37a6df995c4537568650bcfec37ef386dc2dfdbdc89b839d80
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/container@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@inversifyjs/container@npm:1.9.1"
+  dependencies:
+    "@inversifyjs/common": 1.5.0
+    "@inversifyjs/core": 5.2.0
+    "@inversifyjs/reflect-metadata-utils": 1.1.0
+  peerDependencies:
+    reflect-metadata: ~0.2.2
+  checksum: 28b07029a6cce9d1fa73b1599fdbb800c6454903593e79e87d32966ed0f8acce4912fdb4c9ea7997b81c20638721cd5431d6cf39420eeb4a5021633017ca41e1
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/core@npm:5.2.0":
+  version: 5.2.0
+  resolution: "@inversifyjs/core@npm:5.2.0"
+  dependencies:
+    "@inversifyjs/common": 1.5.0
+    "@inversifyjs/prototype-utils": 0.1.0
+    "@inversifyjs/reflect-metadata-utils": 1.1.0
+  checksum: cde7cca9c3183b7235025726f60244b85715b95ad2f3134b650b7aaa7d0097fa2b712d4065844c286327d281d02c4a98bdd43bdedc1b06811d440ab67689c394
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/prototype-utils@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@inversifyjs/prototype-utils@npm:0.1.0"
+  dependencies:
+    "@inversifyjs/common": 1.5.0
+  checksum: 91b6bcba9bbc2502aa24ce50352a38c88466cca6a1b6aca91099c1e3a162cec9e599eed393e0ead677963b7fd8f3de81ed81837d9bc020c68a1797407b6c2d4c
+  languageName: node
+  linkType: hard
+
+"@inversifyjs/reflect-metadata-utils@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@inversifyjs/reflect-metadata-utils@npm:1.1.0"
+  peerDependencies:
+    reflect-metadata: 0.2.2
+  checksum: b543e34a0f70133239a5634635ec9567f8fe8c7f8501c01acdeb49c96777d1c6d0d680dfad5c67b4b823d1f4750f890621190da15486c9d814d698fff6bfef95
+  languageName: node
+  linkType: hard
+
+"contracts.ts@github:qtvhao/Contracts.ts":
+  version: 1.0.0
+  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=9da55856bc4da8943b580022d5794fb7c5f3b635"
+  dependencies:
+    inversify: ^7.5.1
+    support.ts: "github:qtvhao/Support.ts"
+  checksum: 56527db3093ebd83744122e2009e4ad07b543ea933d24e29afbf7d4b6beb7bb002d765b462f4158b01dfa3368f709e3d46da698a95c74ef423b0936f06c98e1a
+  languageName: node
+  linkType: hard
+
+"contracts.ts@github:qtvhao/contracts.ts":
+  version: 1.0.0
+  resolution: "contracts.ts@https://github.com/qtvhao/contracts.ts.git#commit=9da55856bc4da8943b580022d5794fb7c5f3b635"
+  dependencies:
+    inversify: ^7.5.1
+    support.ts: "github:qtvhao/Support.ts"
+  checksum: 56527db3093ebd83744122e2009e4ad07b543ea933d24e29afbf7d4b6beb7bb002d765b462f4158b01dfa3368f709e3d46da698a95c74ef423b0936f06c98e1a
+  languageName: node
+  linkType: hard
+
+"inversify@npm:^7.0.0-alpha.5, inversify@npm:^7.5.1":
+  version: 7.5.1
+  resolution: "inversify@npm:7.5.1"
+  dependencies:
+    "@inversifyjs/common": 1.5.0
+    "@inversifyjs/container": 1.9.1
+    "@inversifyjs/core": 5.2.0
+  peerDependencies:
+    reflect-metadata: ~0.2.2
+  checksum: a4f6275d28c304600d1d4183e3b09c08cec4c804aed33ad4512e6fbfc239f4f67e065e9ca9278fd94f06d8fa71edafab117d619ef897167289df70231041307c
+  languageName: node
+  linkType: hard
+
+"kernel.ts@github:qtvhao/kernel.ts":
+  version: 1.0.0
+  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=b69478eb871f8b68b3b86c2479c57a011c19c35a"
+  dependencies:
+    contracts.ts: "github:qtvhao/contracts.ts"
+    inversify: ^7.5.1
+    support.ts: "github:qtvhao/support.ts"
+  checksum: 88df4295655c5df303d14c6b1819901dd75e10d89a12f3a1e5784025e7377453317af283f5315975bc293579645169509986f1d90ba807eb7f6ad067ca3f611e
+  languageName: node
+  linkType: hard
+
+"reflect-metadata@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "reflect-metadata@npm:0.2.2"
+  checksum: a66c7b583e4efdd8f3c3124fbff33da2d0c86d8280617516308b32b2159af7a3698c961db3246387f56f6316b1d33a608f39bb2b49d813316dfc58f6d3bf3210
+  languageName: node
+  linkType: hard
+
+"support.ts@github:qtvhao/Support.ts":
+  version: 1.0.0
+  resolution: "support.ts@https://github.com/qtvhao/Support.ts.git#commit=444ed77b7c017e24084af86cb83b111cc0b75483"
+  dependencies:
+    contracts.ts: "github:qtvhao/Contracts.ts"
+    inversify: ^7.5.1
+  checksum: 40301cb8b70242dbe97da53efd6d18c81966d9f6af3e2827b55664ec1f8b327b42bc54f075fea6ccdb813216eff0bdf171130bd2e5b378b23381ca3f3160bc64
+  languageName: node
+  linkType: hard
+
+"support.ts@github:qtvhao/support.ts":
+  version: 1.0.0
+  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=444ed77b7c017e24084af86cb83b111cc0b75483"
+  dependencies:
+    contracts.ts: "github:qtvhao/Contracts.ts"
+    inversify: ^7.5.1
+  checksum: 40301cb8b70242dbe97da53efd6d18c81966d9f6af3e2827b55664ec1f8b327b42bc54f075fea6ccdb813216eff0bdf171130bd2e5b378b23381ca3f3160bc64
+  languageName: node
+  linkType: hard
+
 "systemclock@workspace:.":
   version: 0.0.0-use.local
   resolution: "systemclock@workspace:."
   dependencies:
+    inversify: ^7.0.0-alpha.5
+    kernel.ts: "github:qtvhao/kernel.ts"
+    reflect-metadata: ^0.2.2
+    support.ts: "github:qtvhao/support.ts"
     typescript: ^5.8.3
   languageName: unknown
   linkType: soft

@@ -23,7 +23,9 @@
   },
   "dependencies": {
     "inversify": "^7.0.0-alpha.5",
+    "kernel.ts": "github:qtvhao/kernel.ts",
     "reflect-metadata": "^0.2.2",
+    "support.ts": "github:qtvhao/support.ts",
     "typescript": "^5.8.3"
   }
 }
