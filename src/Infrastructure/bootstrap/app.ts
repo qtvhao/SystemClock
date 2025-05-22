@@ -1,6 +1,7 @@
 import { AppBootstrapper, Application } from 'kernel.ts';
 import path from 'path';
 import { ServiceProvider } from 'support.ts';
+import { EventBusServiceProvider } from "messaging.ts"
 
 export const app = new Application({
     base: path.resolve(__dirname, '../'),                      // Project root
@@ -14,7 +15,7 @@ export const app = new Application({
 
 class AppServiceProvider extends ServiceProvider {
     register(): void {
-        console.log(this.app.isLocal())
+        this.app.register(new EventBusServiceProvider(this.app))
     }
 }
 
