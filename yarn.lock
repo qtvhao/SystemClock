@@ -54,23 +54,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-transformer@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "class-transformer@npm:0.5.1"
+  checksum: f191c8b4cc4239990f5efdd790cabdd852c243ed66248e39f6616a349c910c6eed2d9fd1fbf7ee6ea89f69b4f1d0b493b27347fe0cd0ae26b47c3745a805b6d3
+  languageName: node
+  linkType: hard
+
 "contracts.ts@github:qtvhao/Contracts.ts":
   version: 1.0.0
-  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=9da55856bc4da8943b580022d5794fb7c5f3b635"
+  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=45beaab293d3d8d5f7b84a4b57118da85bc90567"
   dependencies:
     inversify: ^7.5.1
-    support.ts: "github:qtvhao/Support.ts"
-  checksum: 56527db3093ebd83744122e2009e4ad07b543ea933d24e29afbf7d4b6beb7bb002d765b462f4158b01dfa3368f709e3d46da698a95c74ef423b0936f06c98e1a
+  checksum: 35e6de2c6b142635922dbfd2eb482e4a5bcb2d0089d2ee566817a95eb2b3c72e0a1fc51c92a1bd0dc71d2b844d50965106b124d932e6878b5ee6d4fd0c696513
   languageName: node
   linkType: hard
 
 "contracts.ts@github:qtvhao/contracts.ts":
   version: 1.0.0
-  resolution: "contracts.ts@https://github.com/qtvhao/contracts.ts.git#commit=9da55856bc4da8943b580022d5794fb7c5f3b635"
+  resolution: "contracts.ts@https://github.com/qtvhao/contracts.ts.git#commit=45beaab293d3d8d5f7b84a4b57118da85bc90567"
   dependencies:
     inversify: ^7.5.1
-    support.ts: "github:qtvhao/Support.ts"
-  checksum: 56527db3093ebd83744122e2009e4ad07b543ea933d24e29afbf7d4b6beb7bb002d765b462f4158b01dfa3368f709e3d46da698a95c74ef423b0936f06c98e1a
+  checksum: 35e6de2c6b142635922dbfd2eb482e4a5bcb2d0089d2ee566817a95eb2b3c72e0a1fc51c92a1bd0dc71d2b844d50965106b124d932e6878b5ee6d4fd0c696513
   languageName: node
   linkType: hard
 
@@ -89,12 +94,23 @@ __metadata:
 
 "kernel.ts@github:qtvhao/kernel.ts":
   version: 1.0.0
-  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=b69478eb871f8b68b3b86c2479c57a011c19c35a"
+  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=9d93e74d2db6d7e2d681c1dab5f89392d4c69a2f"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
     support.ts: "github:qtvhao/support.ts"
-  checksum: 88df4295655c5df303d14c6b1819901dd75e10d89a12f3a1e5784025e7377453317af283f5315975bc293579645169509986f1d90ba807eb7f6ad067ca3f611e
+  checksum: 3cbfe0c7f6576332189b7919753e7c3dae7cb538e7fc84929084e17c36f794bf35aa42b019a8b88205ff8c7d25801ad570c4c4081a496fa42590bd034013e64a
+  languageName: node
+  linkType: hard
+
+"messaging.ts@github:qtvhao/messaging.ts":
+  version: 1.0.0
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=8479523ba70f4753210050bb97792c12b0ef56f4"
+  dependencies:
+    class-transformer: ^0.5.1
+    contracts.ts: "github:qtvhao/contracts.ts"
+    kernel.ts: "github:qtvhao/kernel.ts"
+  checksum: 4cf9e1eb067d19bf1ecc2d4d5783e2239f563d8caa8f8642bd2887bfbddda8ac01f147eceef2a71cc9cd1be935f04a26891ea75dfe015cf90f5e4aad385313c2
   languageName: node
   linkType: hard
 
@@ -105,23 +121,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"support.ts@github:qtvhao/Support.ts":
-  version: 1.0.0
-  resolution: "support.ts@https://github.com/qtvhao/Support.ts.git#commit=444ed77b7c017e24084af86cb83b111cc0b75483"
-  dependencies:
-    contracts.ts: "github:qtvhao/Contracts.ts"
-    inversify: ^7.5.1
-  checksum: 40301cb8b70242dbe97da53efd6d18c81966d9f6af3e2827b55664ec1f8b327b42bc54f075fea6ccdb813216eff0bdf171130bd2e5b378b23381ca3f3160bc64
-  languageName: node
-  linkType: hard
-
 "support.ts@github:qtvhao/support.ts":
   version: 1.0.0
-  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=444ed77b7c017e24084af86cb83b111cc0b75483"
+  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=53b3344c8fb76ab47a7b40f4cfbc1fe1d1d24a30"
   dependencies:
     contracts.ts: "github:qtvhao/Contracts.ts"
     inversify: ^7.5.1
-  checksum: 40301cb8b70242dbe97da53efd6d18c81966d9f6af3e2827b55664ec1f8b327b42bc54f075fea6ccdb813216eff0bdf171130bd2e5b378b23381ca3f3160bc64
+  checksum: 50212382154247fca2e6e3856c6d84a35d3b0eef38db5edc525e7a453d7a0eb04a9599ef9373a6c8f9a545cfd6c23d7e382567c49dc475d088ca3be74cc0f25f
   languageName: node
   linkType: hard
 
@@ -131,6 +137,7 @@ __metadata:
   dependencies:
     inversify: ^7.0.0-alpha.5
     kernel.ts: "github:qtvhao/kernel.ts"
+    messaging.ts: "github:qtvhao/messaging.ts"
     reflect-metadata: ^0.2.2
     support.ts: "github:qtvhao/support.ts"
     typescript: ^5.8.3
