@@ -61,35 +61,6 @@ export const app = new Application(
     "vi-VN",
 );
 
-class X implements IMessageBroker {
-    async subscribe<T>(topic: string, handler: MessageHandler): Promise<void> {
-        console.log({ topic });
-        setTimeout(() => {
-            handler({
-                topic,
-                message: {
-                    key: Buffer.from(""),
-                    value: Buffer.from(JSON.stringify({
-                        s: 1,
-                    })),
-                },
-            } as EachMessagePayload);
-        }, 10);
-    }
-    unsubscribe(topic: string): Promise<void> {
-        return new Promise((r) => {});
-    }
-    async produce(topic: string, message: Buffer): Promise<void> {
-        console.log({ topic, message });
-    }
-    setup(): Promise<void> {
-        return new Promise((r) => {});
-    }
-    start(): Promise<void> {
-        return new Promise((r) => {});
-    }
-}
-
 class EventHandlerResolver implements IEventHandlerResolver {
     register<T extends IDomainEvent>(
         event: EventConstructor<T>,
@@ -126,14 +97,11 @@ class ClockDomainEventMapper
 }
 class AppServiceProvider extends ServiceProvider {
     register(): void {
-        const creators: IMessageBrokerFactoryMap = new Map();
-        creators.set("inmemory", () => {
-            const broker = new InMemoryMessageBroker();
-            broker.setup();
-            broker.start();
-
-            return broker;
-        });
+        const creators: IMessageBrokerFactoryMap = new Map([
+            ["inmemory", () => {
+                return new InMemoryMessageBroker();
+            }],
+        ]);
         this.app.bind<IMessageBrokerFactoryMap>(TYPES.MessageBrokerFactoryMap)
             .toConstantValue(creators);
         this.app.bind<IEventHandlerResolver>(TYPES.EventHandlerResolver)
