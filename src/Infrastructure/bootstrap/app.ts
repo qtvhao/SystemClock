@@ -3,6 +3,7 @@ import path from "path";
 import { ServiceProvider } from "support.ts";
 import { EventBusServiceProvider } from "messaging.ts";
 import {
+    EachMessagePayload,
     EventConstructor,
     IDomainEvent,
     IDomainEventMapper,
@@ -62,6 +63,17 @@ export const app = new Application(
 class X implements IMessageBroker {
     async subscribe<T>(topic: string, handler: MessageHandler): Promise<void> {
         console.log({ topic });
+        setTimeout(() => {
+            handler({
+                topic,
+                message: {
+                    key: Buffer.from(""),
+                    value: Buffer.from(JSON.stringify({
+                        s: 1,
+                    })),
+                },
+            } as EachMessagePayload);
+        }, 10);
     }
     unsubscribe(topic: string): Promise<void> {
         return new Promise((r) => {});
