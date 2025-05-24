@@ -105,12 +105,12 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=7b2fb54f0241e17df67a74ffda9a84454667c1e3"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=923aa20b82a9b224f709891e18e3f86cbf8b89fa"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
     kernel.ts: "github:qtvhao/kernel.ts"
-  checksum: 95c23cb36c70de043ce54d2d3ece5d0962a1414824ae601b1a2f2ba16eb8989686b7d6949058b170ef3e1ab37e2db8e614552c38f5937b3cd050e2f1fe4f5aef
+  checksum: a0304f30fdef6c10d83bbebd1521823cc35f4a472e57fc90981ac5f391ff7dca33d72c14dacc65a573293f80af20bc4f52ef29ec57367da80b5b18ee381d4489
   languageName: node
   linkType: hard
 
@@ -135,12 +135,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "systemclock@workspace:."
   dependencies:
+    contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.0.0-alpha.5
     kernel.ts: "github:qtvhao/kernel.ts"
     messaging.ts: "github:qtvhao/messaging.ts"
     reflect-metadata: ^0.2.2
     support.ts: "github:qtvhao/support.ts"
     typescript: ^5.8.3
+    uuid: ^11.1.0
   languageName: unknown
   linkType: soft
 
@@ -161,5 +163,14 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1b503525a88ff0ff5952e95870971c4fb2118c17364d60302c21935dedcd6c37e6a0a692f350892bafcef6f4a16d09073fe461158547978d2f16fbe4cb18581c
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "uuid@npm:11.1.0"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 840f19758543c4631e58a29439e51b5b669d5f34b4dd2700b6a1d15c5708c7a6e0c3e2c8c4a2eae761a3a7caa7e9884d00c86c02622ba91137bd3deade6b4b4a
   languageName: node
   linkType: hard

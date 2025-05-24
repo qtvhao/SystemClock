@@ -1,50 +1,18 @@
 import { AppBootstrapper, Application } from "kernel.ts";
 import path from "path";
 import { ServiceProvider } from "support.ts";
-import { EventBusServiceProvider, InMemoryMessageBroker } from "messaging.ts";
+import { EventBusServiceProvider } from "messaging.ts";
 import {
-    EachMessagePayload,
-    EventConstructor,
     IDomainEvent,
-    IDomainEventMapper,
     IDomainEventMapperRegistry,
-    IEventBus,
-    IEventHandler,
-    IEventHandlerResolver,
     IEventTopicMapper,
-    IMessageBroker,
-    IMessageBrokerFactoryMap,
     Message,
-    MessageHandler,
     TYPES,
 } from "contracts.ts";
-
-//
-class ClockEvent implements IDomainEvent {
-    __brand: "DomainEvent" = "DomainEvent";
-    public readonly occurredOn: Date;
-    public readonly aggregateId: string;
-
-    version() {
-        return 1;
-    }
-    eventName() {
-        return "ClockEvent";
-    }
-    constructor(aggregateId: string) {
-        this.occurredOn = new Date();
-        this.aggregateId = aggregateId;
-    }
-}
-class ClockEventHandler implements IEventHandler<ClockEvent> {
-    async handle(event: ClockEvent): Promise<void> {
-        console.log(`Handled ClockEvent for aggregateId: ${event.aggregateId}`);
-    }
-
-    supports() {
-        return [ClockEvent];
-    }
-}
+import { FiveMinuteTickOccurredEvent } from "../../Domain/Events/FiveMinuteTickOccurredEvent";
+import { ClockId } from "../../Domain/ValueObjects/ClockId";
+import { ClockDomainEventMapper } from "../../Application/Handlers/Events/ClockDomainEventMapper";
+import { SystemClockServiceProvider } from "./SystemClockServiceProvider";
 
 export const app = new Application(
     {
@@ -61,81 +29,14 @@ export const app = new Application(
     "vi-VN",
 );
 
-class EventHandlerResolver implements IEventHandlerResolver {
-    register<T extends IDomainEvent>(
-        event: EventConstructor<T>,
-        handler: IEventHandler<T>,
-    ): void {
-    }
-    resolve<T extends IDomainEvent>(
-        event: EventConstructor<T>,
-    ): IEventHandler<T> {
-        return new ClockEventHandler() as IEventHandler<T>;
-    }
-}
-interface ClockEventDTO {
-    x: string;
-}
-class ClockDomainEventMapper
-    implements IDomainEventMapper<Message, ClockEvent> {
-    toDTO(event: ClockEvent): Message {
-        return {
-            key: "x",
-            value: JSON.stringify({
-                x: event.aggregateId,
-            }),
-            headers: {},
-        };
-    }
-    toDomain(dto: object): ClockEvent {
-        const data = dto as ClockEventDTO;
-        return new ClockEvent(data.x);
-    }
-    isDomainEvent(event: IDomainEvent): event is ClockEvent {
-        return true;
-    }
-}
 class AppServiceProvider extends ServiceProvider {
     register(): void {
-        const creators: IMessageBrokerFactoryMap = new Map([
-            ["inmemory", () => {
-                return new InMemoryMessageBroker();
-            }],
-        ]);
-        this.app.bind<IMessageBrokerFactoryMap>(TYPES.MessageBrokerFactoryMap)
-            .toConstantValue(creators);
-        this.app.bind<IEventHandlerResolver>(TYPES.EventHandlerResolver)
-            .toConstantValue(new EventHandlerResolver());
-        this.booting(() => {
-            const mapper = this.app.get<IEventTopicMapper>(
-                TYPES.EventTopicMapper,
-            );
-            mapper.register("topic1", ClockEvent);
-
-            const domainEventMapperRegistry = this.app.get<
-                IDomainEventMapperRegistry<IDomainEvent, Message>
-            >(
-                TYPES.DomainEventMapperRegistry,
-            );
-            domainEventMapperRegistry.set(
-                new ClockEvent("").eventName(),
-                new ClockDomainEventMapper(),
-            );
-        });
-        this.booted(() => {
-            this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<ClockEvent>(
-                ClockEvent,
-                new ClockEventHandler(),
-            );
-            this.app.get<IEventBus>(TYPES.EventBus).publish([
-                new ClockEvent("aggr-idx"),
-            ]);
-        });
     }
 }
 
 const bootstrapper = new AppBootstrapper(app, [
     new AppServiceProvider(app),
+    new SystemClockServiceProvider(app),
     new EventBusServiceProvider(app),
 ]);
 bootstrapper.bootstrap();

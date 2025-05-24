@@ -22,11 +22,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "contracts.ts": "github:qtvhao/contracts.ts",
     "inversify": "^7.0.0-alpha.5",
     "kernel.ts": "github:qtvhao/kernel.ts",
     "messaging.ts": "github:qtvhao/messaging.ts",
     "reflect-metadata": "^0.2.2",
     "support.ts": "github:qtvhao/support.ts",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "uuid": "^11.1.0"
   }
 }
