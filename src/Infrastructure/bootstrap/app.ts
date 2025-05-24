@@ -2,16 +2,6 @@ import { AppBootstrapper, Application } from "kernel.ts";
 import path from "path";
 import { ServiceProvider } from "support.ts";
 import { EventBusServiceProvider } from "messaging.ts";
-import {
-    IDomainEvent,
-    IDomainEventMapperRegistry,
-    IEventTopicMapper,
-    Message,
-    TYPES,
-} from "contracts.ts";
-import { FiveMinuteTickOccurredEvent } from "../../Domain/Events/FiveMinuteTickOccurredEvent";
-import { ClockId } from "../../Domain/ValueObjects/ClockId";
-import { ClockDomainEventMapper } from "../../Application/Handlers/Events/ClockDomainEventMapper";
 import { SystemClockServiceProvider } from "./SystemClockServiceProvider";
 
 export const app = new Application(
@@ -36,7 +26,7 @@ class AppServiceProvider extends ServiceProvider {
 
 const bootstrapper = new AppBootstrapper(app, [
     new AppServiceProvider(app),
-    new SystemClockServiceProvider(app),
     new EventBusServiceProvider(app),
+    new SystemClockServiceProvider(app),
 ]);
 bootstrapper.bootstrap();

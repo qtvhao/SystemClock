@@ -27,28 +27,6 @@ class ClockEventHandler implements IEventHandler<FiveMinuteTickOccurredEvent> {
     }
 }
 
-class EventHandlerResolver implements IEventHandlerResolver {
-    private handlers = new Map<string, IEventHandler<any>>();
-
-    register<T extends IDomainEvent>(
-        event: EventConstructor<T>,
-        handler: IEventHandler<T>,
-    ): void {
-        this.handlers.set(event.name, handler);
-    }
-
-    resolve<T extends IDomainEvent>(
-        event: EventConstructor<T>,
-    ): IEventHandler<T> {
-        const handler = this.handlers.get(event.name);
-        if (!handler) {
-            throw new Error(`No handler registered for event: ${event.name}`);
-        }
-
-        return handler as IEventHandler<T>;
-    }
-}
-
 export class SystemClockServiceProvider extends ServiceProvider
     implements IServiceProvider {
     public register(): void {
@@ -57,15 +35,11 @@ export class SystemClockServiceProvider extends ServiceProvider
             this.app.get<IEventBus>(TYPES.EventBus),
         );
         const scheduler = new ClockScheduler(handler, clockId);
-        scheduler.start();
         //
-        const resolver = new EventHandlerResolver();
-
-        resolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
-
-        this.app.bind<IEventHandlerResolver>(TYPES.EventHandlerResolver)
-            .toConstantValue(resolver);
-
+        const handlerResolver = this.app.get<IEventHandlerResolver>(
+          TYPES.EventHandlerResolver,
+        );
+        handlerResolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
         //
 
         this.booted(() => {
@@ -75,6 +49,7 @@ export class SystemClockServiceProvider extends ServiceProvider
                 FiveMinuteTickOccurredEvent,
                 new ClockEventHandler(),
             );
+            scheduler.start();
         });
 
         this.booting(() => {
