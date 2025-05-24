@@ -1,7 +1,7 @@
 import { AppBootstrapper, Application } from "kernel.ts";
 import path from "path";
 import { ServiceProvider } from "support.ts";
-import { EventBusServiceProvider } from "messaging.ts";
+import { EventBusServiceProvider, InMemoryMessageBroker } from "messaging.ts";
 import {
     EachMessagePayload,
     EventConstructor,
@@ -14,6 +14,7 @@ import {
     IEventTopicMapper,
     IMessageBroker,
     IMessageBrokerFactoryMap,
+    Message,
     MessageHandler,
     TYPES,
 } from "contracts.ts";
@@ -101,12 +102,23 @@ class EventHandlerResolver implements IEventHandlerResolver {
         return new ClockEventHandler() as IEventHandler<T>;
     }
 }
-class XDomainEventMapper implements IDomainEventMapper<object, ClockEvent> {
-    toDTO(event: ClockEvent): object {
-        return {};
+interface ClockEventDTO {
+    x: string;
+}
+class ClockDomainEventMapper
+    implements IDomainEventMapper<Message, ClockEvent> {
+    toDTO(event: ClockEvent): Message {
+        return {
+            key: "x",
+            value: JSON.stringify({
+                x: event.aggregateId,
+            }),
+            headers: {},
+        };
     }
     toDomain(dto: object): ClockEvent {
-        return new ClockEvent("aggr-id");
+        const data = dto as ClockEventDTO;
+        return new ClockEvent(data.x);
     }
     isDomainEvent(event: IDomainEvent): event is ClockEvent {
         return true;
@@ -116,7 +128,11 @@ class AppServiceProvider extends ServiceProvider {
     register(): void {
         const creators: IMessageBrokerFactoryMap = new Map();
         creators.set("inmemory", () => {
-            return new X();
+            const broker = new InMemoryMessageBroker();
+            broker.setup();
+            broker.start();
+
+            return broker;
         });
         this.app.bind<IMessageBrokerFactoryMap>(TYPES.MessageBrokerFactoryMap)
             .toConstantValue(creators);
@@ -129,13 +145,13 @@ class AppServiceProvider extends ServiceProvider {
             mapper.register("topic1", ClockEvent);
 
             const domainEventMapperRegistry = this.app.get<
-                IDomainEventMapperRegistry<IDomainEvent, object>
+                IDomainEventMapperRegistry<IDomainEvent, Message>
             >(
                 TYPES.DomainEventMapperRegistry,
             );
             domainEventMapperRegistry.set(
-                new ClockEvent("aggr-id1").eventName(),
-                new XDomainEventMapper(),
+                new ClockEvent("").eventName(),
+                new ClockDomainEventMapper(),
             );
         });
         this.booted(() => {
@@ -144,7 +160,7 @@ class AppServiceProvider extends ServiceProvider {
                 new ClockEventHandler(),
             );
             this.app.get<IEventBus>(TYPES.EventBus).publish([
-                new ClockEvent("aggr-id"),
+                new ClockEvent("aggr-idx"),
             ]);
         });
     }
