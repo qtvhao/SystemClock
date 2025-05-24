@@ -121,7 +121,10 @@ class AppServiceProvider extends ServiceProvider {
             >(
                 TYPES.DomainEventMapperRegistry,
             );
-            domainEventMapperRegistry.set(new ClockEvent('aggr-id1').eventName(), new XDomainEventMapper);
+            domainEventMapperRegistry.set(
+                new ClockEvent("aggr-id1").eventName(),
+                new XDomainEventMapper(),
+            );
         });
         this.booted(() => {
             this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<ClockEvent>(
