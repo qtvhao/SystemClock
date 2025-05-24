@@ -5,6 +5,8 @@ import { EventBusServiceProvider } from "messaging.ts";
 import {
     EventConstructor,
     IDomainEvent,
+    IDomainEventMapper,
+    IDomainEventMapperRegistry,
     IEventBus,
     IEventHandler,
     IEventHandlerResolver,
@@ -32,15 +34,15 @@ class ClockEvent implements IDomainEvent {
         this.aggregateId = aggregateId;
     }
 }
-// class ClockEventHandler implements IEventHandler<ClockEvent> {
-//     async handle(event: ClockEvent): Promise<void> {
-//         console.log(`Handled ClockEvent for aggregateId: ${event.aggregateId}`);
-//     }
+class ClockEventHandler implements IEventHandler<ClockEvent> {
+    async handle(event: ClockEvent): Promise<void> {
+        console.log(`Handled ClockEvent for aggregateId: ${event.aggregateId}`);
+    }
 
-//     supports() {
-//         return [ClockEvent];
-//     }
-// }
+    supports() {
+        return [ClockEvent];
+    }
+}
 
 export const app = new Application(
     {
@@ -58,14 +60,14 @@ export const app = new Application(
 );
 
 class X implements IMessageBroker {
-    subscribe<T>(topic: string, handler: MessageHandler): Promise<void> {
-        return new Promise((r) => {});
+    async subscribe<T>(topic: string, handler: MessageHandler): Promise<void> {
+        console.log({ topic });
     }
     unsubscribe(topic: string): Promise<void> {
         return new Promise((r) => {});
     }
-    produce(topic: string, message: Buffer): Promise<void> {
-        return new Promise((r) => {});
+    async produce(topic: string, message: Buffer): Promise<void> {
+        console.log({ topic, message });
     }
     setup(): Promise<void> {
         return new Promise((r) => {});
@@ -74,13 +76,7 @@ class X implements IMessageBroker {
         return new Promise((r) => {});
     }
 }
-class XEventHandler implements IEventHandler {
-    async handle(event: IDomainEvent): Promise<void> {
-    }
-    supports(): EventConstructor<IDomainEvent>[] {
-        return [ClockEvent];
-    }
-}
+
 class EventHandlerResolver implements IEventHandlerResolver {
     register<T extends IDomainEvent>(
         event: EventConstructor<T>,
@@ -90,7 +86,18 @@ class EventHandlerResolver implements IEventHandlerResolver {
     resolve<T extends IDomainEvent>(
         event: EventConstructor<T>,
     ): IEventHandler<T> {
-        return new XEventHandler() as IEventHandler<T>;
+        return new ClockEventHandler() as IEventHandler<T>;
+    }
+}
+class XDomainEventMapper implements IDomainEventMapper<object, ClockEvent> {
+    toDTO(event: ClockEvent): object {
+        return {};
+    }
+    toDomain(dto: object): ClockEvent {
+        return new ClockEvent("aggr-id");
+    }
+    isDomainEvent(event: IDomainEvent): event is ClockEvent {
+        return true;
     }
 }
 class AppServiceProvider extends ServiceProvider {
@@ -103,28 +110,33 @@ class AppServiceProvider extends ServiceProvider {
             .toConstantValue(creators);
         this.app.bind<IEventHandlerResolver>(TYPES.EventHandlerResolver)
             .toConstantValue(new EventHandlerResolver());
-        const eventBusServiceProvider = new EventBusServiceProvider(this.app);
-        this.app.register(eventBusServiceProvider);
-        // // this.app.get<IEventTopicMapper>(TYPES.EventTopicMapper).register('my-memory-topic', ClockEvent);
-        // this.booting(() => {
-        //     eventBusServiceProvider.callBootingCallbacks();
-        //     // this.app.get<IEventMapperRegistry>(TYPES.EventMapperRegistry).set('my-memory-topic', )
-        // });
-        // this.booted(() => {
-        //     console.log(".");
-        //     eventBusServiceProvider.callBootedCallbacks();
-        //     // this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<ClockEvent>(
-        //     //     ClockEvent,
-        //     //     new ClockEventHandler(),
-        //     // );
-        //     this.app.get<IEventBus>(TYPES.EventBus).publish([
-        //         // new ClockEvent("aggr-id"),
-        //     ]);
-        // });
+        this.booting(() => {
+            const mapper = this.app.get<IEventTopicMapper>(
+                TYPES.EventTopicMapper,
+            );
+            mapper.register("topic1", ClockEvent);
+
+            const domainEventMapperRegistry = this.app.get<
+                IDomainEventMapperRegistry<IDomainEvent, object>
+            >(
+                TYPES.DomainEventMapperRegistry,
+            );
+            domainEventMapperRegistry.set(new ClockEvent('aggr-id1').eventName(), new XDomainEventMapper);
+        });
+        this.booted(() => {
+            this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<ClockEvent>(
+                ClockEvent,
+                new ClockEventHandler(),
+            );
+            this.app.get<IEventBus>(TYPES.EventBus).publish([
+                new ClockEvent("aggr-id"),
+            ]);
+        });
     }
 }
 
-class Bootstrapper extends AppBootstrapper {}
-
-const bootstrapper = new Bootstrapper(app, [new AppServiceProvider(app)]);
+const bootstrapper = new AppBootstrapper(app, [
+    new AppServiceProvider(app),
+    new EventBusServiceProvider(app),
+]);
 bootstrapper.bootstrap();
