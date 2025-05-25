@@ -122,7 +122,7 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=2cf187171c61ae98ffea3623c24dcd98c2b45155"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=ad96211c579df5d31c09592321d2f1d2f935b4f1"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
