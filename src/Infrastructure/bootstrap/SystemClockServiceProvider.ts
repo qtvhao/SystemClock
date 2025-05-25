@@ -42,14 +42,14 @@ export class SystemClockServiceProvider extends ServiceProvider
         handlerResolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
         //
 
-        this.booted(() => {
-            this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<
+        this.booted(async () => {
+            await this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<
                 FiveMinuteTickOccurredEvent
             >(
                 FiveMinuteTickOccurredEvent,
                 new ClockEventHandler(),
             );
-            scheduler.start();
+            await scheduler.start();
         });
 
         this.booting(() => {

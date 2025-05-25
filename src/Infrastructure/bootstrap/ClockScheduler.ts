@@ -11,7 +11,7 @@ export class ClockScheduler implements FiveMinuteTickPublisherContract {
     private readonly clockId: ClockId
   ) {}
 
-  public start(): void {
+  public async start(): Promise<void> {
     // Immediate tick
     this.handler.execute(new EmitFiveMinuteTickCommand(this.clockId.toString()));
 
