@@ -3,6 +3,7 @@ import path from "path";
 import { ServiceProvider } from "support.ts";
 import { EventBusServiceProvider } from "messaging.ts";
 import { SystemClockServiceProvider } from "./SystemClockServiceProvider";
+import { CqrsServiceProvider } from "cqrs.ts";
 
 export const app = new Application(
     {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider {
 const bootstrapper = new AppBootstrapper(app, [
     new AppServiceProvider(app),
     new EventBusServiceProvider(app),
+    new CqrsServiceProvider(app),
     new SystemClockServiceProvider(app),
 ]);
 bootstrapper.bootstrap();

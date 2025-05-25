@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "contracts.ts": "github:qtvhao/contracts.ts",
+    "cqrs.ts": "github:qtvhao/cqrs.ts",
     "inversify": "^7.0.0-alpha.5",
     "kernel.ts": "github:qtvhao/kernel.ts",
     "messaging.ts": "github:qtvhao/messaging.ts",
