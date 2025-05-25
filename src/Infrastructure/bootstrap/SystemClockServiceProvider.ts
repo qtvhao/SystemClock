@@ -56,7 +56,7 @@ export class SystemClockServiceProvider extends ServiceProvider
             const mapper = this.app.get<IEventTopicMapper>(
                 TYPES.EventTopicMapper,
             );
-            mapper.register("topic1", FiveMinuteTickOccurredEvent);
+            mapper.register("clock.fiveMinuteTick", FiveMinuteTickOccurredEvent);
 
             const domainEventMapperRegistry = this.app.get<
                 IDomainEventMapperRegistry<IDomainEvent, Message>

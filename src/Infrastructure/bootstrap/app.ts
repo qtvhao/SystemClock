@@ -30,3 +30,13 @@ const bootstrapper = new AppBootstrapper(app, [
     new SystemClockServiceProvider(app),
 ]);
 bootstrapper.bootstrap();
+
+const gracefulShutdown = async () => {
+  console.debug("[App] Terminating application...");
+  await app.terminate();
+  console.debug("[App] Application terminated.");
+  process.exit(0);
+};
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
