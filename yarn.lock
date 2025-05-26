@@ -63,30 +63,30 @@ __metadata:
 
 "contracts.ts@github:qtvhao/Contracts.ts":
   version: 1.0.0
-  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=b39c3971ea0eb5ffc6b6fcea5f55ad545419b116"
+  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=3044408212cd57af2abba82510742cc1762ebcd7"
   dependencies:
     inversify: ^7.5.1
-  checksum: 09dc735312e2aa0bfb137f6b0aa55512f655e97443a3ec36512be76b64869a258b7bd3e612ee21abd64ad1dc34c900af85aed976d9d505d027dc8c7ac3f2ec76
+  checksum: a29e20f701cfa853dec123e25b6483c4421073d30e555635dcc4507109bf2ad6e7c7792c7dbc48dc0159cdcb292e0e0ac82a01f1045388918ad7bb17d4450d2e
   languageName: node
   linkType: hard
 
 "contracts.ts@github:qtvhao/contracts.ts":
   version: 1.0.0
-  resolution: "contracts.ts@https://github.com/qtvhao/contracts.ts.git#commit=b39c3971ea0eb5ffc6b6fcea5f55ad545419b116"
+  resolution: "contracts.ts@https://github.com/qtvhao/contracts.ts.git#commit=3044408212cd57af2abba82510742cc1762ebcd7"
   dependencies:
     inversify: ^7.5.1
-  checksum: 09dc735312e2aa0bfb137f6b0aa55512f655e97443a3ec36512be76b64869a258b7bd3e612ee21abd64ad1dc34c900af85aed976d9d505d027dc8c7ac3f2ec76
+  checksum: a29e20f701cfa853dec123e25b6483c4421073d30e555635dcc4507109bf2ad6e7c7792c7dbc48dc0159cdcb292e0e0ac82a01f1045388918ad7bb17d4450d2e
   languageName: node
   linkType: hard
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=4f17be5cd4a1f7f54af56f111c673b628ebf3567"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=ba1a4e2d6435c6bfcf97b8d54cbfdd66bcaf86bd"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     kernel.ts: "github:qtvhao/kernel.ts"
     support.ts: "github:qtvhao/support.ts"
-  checksum: 9c75f3d14304ac3489f418e51c3a21f3dc853d213f26c1ef2859c7ed0359c5c070c871ac9ce2eb3ba9d2dfaa7a60cf902dbc8589411436087bb6a090d1da1f64
+  checksum: a20d53aef01b5289e569afb9fe27779b5dc5a72d494ac0b9ea2a8b016e60bb5235d6bdf9da1078c5ee84e47ea7e2468437379a6de192ecfc63cb1ef9c3f067fc
   languageName: node
   linkType: hard
 
@@ -112,24 +112,24 @@ __metadata:
 
 "kernel.ts@github:qtvhao/kernel.ts":
   version: 1.0.0
-  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=6a20835bde556d8b5f8a43be85210001c92a59e6"
+  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=50eedd55fb8ac1405ddd9a867cee18058b452351"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     dotenv: ^16.5.0
     inversify: ^7.5.1
     support.ts: "github:qtvhao/support.ts"
-  checksum: 50c503dfa29eb2d720b485bb85947027381c644a86464b9ea6f000a31efc7742945680019e4255244254dfd7abc06b2b937d1b285a4b23651ea7d1c73ce1ae1b
+  checksum: 6c1c70350f4ca01a694ce4ab386e76ed33c4510e23ad30f13649fd2b1381648b82c9ce08751ab7897162d95e68a79d22d1ad0462841f105b2274bb942004971e
   languageName: node
   linkType: hard
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=44181ecb411fe09f66ff7ed12694da82169c4bd1"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=6d652e7b1ce32930ac003b268b39899c8703204c"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
     kernel.ts: "github:qtvhao/kernel.ts"
-  checksum: 19aff7536e761ea0d1eda1380b03895b7a2e05208d70ed6ae875a10fb6e6fdf46b7277e2fdee4fa5bbc6484284e8967e597774aee9d8377add5339afbbb3d2b7
+  checksum: e11836ac1817ffbee4f57261b22803aa1884824b067f4aef1cb4745299a75c2551367b7e7c2b527081d4da5c566f2c85600b5a62633e732ed88df3ff2df88487
   languageName: node
   linkType: hard
 
@@ -142,7 +142,7 @@ __metadata:
 
 "support.ts@github:qtvhao/support.ts":
   version: 1.0.0
-  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=8c6a88122f9204d9bee4859975ee4d6f2c8ab383"
+  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=3ef0c244ed8509986932c29ec246a270ae596668"
   dependencies:
     contracts.ts: "github:qtvhao/Contracts.ts"
     inversify: ^7.5.1
