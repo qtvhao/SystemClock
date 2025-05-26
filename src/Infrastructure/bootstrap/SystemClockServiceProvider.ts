@@ -36,10 +36,10 @@ export class SystemClockServiceProvider extends ServiceProvider
         );
         const scheduler = new ClockScheduler(handler, clockId);
         //
-        const handlerResolver = this.app.get<IEventHandlerResolver>(
+        const eventHandlerResolver = this.app.get<IEventHandlerResolver>(
           TYPES.EventHandlerResolver,
         );
-        handlerResolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
+        eventHandlerResolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
         //
 
         this.booted(async () => {
