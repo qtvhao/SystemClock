@@ -1,9 +1,14 @@
-import { ICommandHandler, IDomainEvent, IEventBus } from "contracts.ts";
+import { ICommandHandler, IDomainEvent, IEventBus, TYPES } from "contracts.ts";
 import { EmitFiveMinuteTickCommand } from "../Commands/EmitFiveMinuteTickCommand";
 import { Clock } from "../../Domain/Entities/Clock";
+import { inject, injectable } from "inversify";
 
-export class EmitFiveMinuteTickHandler implements ICommandHandler<EmitFiveMinuteTickCommand> {
-    constructor(private readonly eventBus: IEventBus) {}
+@injectable()
+export class EmitFiveMinuteTickHandler
+    implements ICommandHandler<EmitFiveMinuteTickCommand> {
+    constructor(
+        @inject(TYPES.EventBus) private readonly eventBus: IEventBus,
+    ) {}
 
     public async handle(command: EmitFiveMinuteTickCommand): Promise<void> {
         const clockId = command.clockId;
