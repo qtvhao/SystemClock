@@ -21,16 +21,7 @@ import { FiveMinuteTickOccurredEvent } from "../../Domain/Events/FiveMinuteTickO
 import { ClockDomainEventMapper } from "../../Application/Handlers/Events/ClockDomainEventMapper";
 import { FiveMinuteTickPublisherContract } from "../../Domain/Contracts/FiveMinuteTickPublisherContract";
 import { EmitFiveMinuteTickCommand } from "../../Application/Commands/EmitFiveMinuteTickCommand";
-
-class ClockEventHandler implements IEventHandler<FiveMinuteTickOccurredEvent> {
-    async handle(event: FiveMinuteTickOccurredEvent): Promise<void> {
-        console.log(`Handled ClockEvent for aggregateId: ${event.aggregateId}`);
-    }
-
-    supports() {
-        return [FiveMinuteTickOccurredEvent];
-    }
-}
+import { ClockEventHandler } from "../../Application/Handlers/Events/ClockEventHandler";
 
 export class SystemClockServiceProvider extends ServiceProvider
     implements IServiceProvider {
