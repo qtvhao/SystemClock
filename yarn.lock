@@ -81,14 +81,14 @@ __metadata:
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=52921bcf4a7218d7db03845c5fbabb4dac39435c"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=0edb351e481ba426014344c49e5e90ed4e9ee4af"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
     kernel.ts: "github:qtvhao/kernel.ts"
     reflect-metadata: ^0.2.2
     support.ts: "github:qtvhao/support.ts"
-  checksum: c7feee38e9a50fbc8c36595204d416724e10e9e9de13355b8609e5841227b23b1f5768899836b40c63cdae22f89ce4b8328147c467898fa4921918a7a669f022
+  checksum: a5dd493f1b658a05c2c3c8ed34cdd3c79ae61a0dc768e6925741abeb43f7fac7ba2251b78288c5cf163a7ed9160edb2aa62405e2068c692344d124be6cb93cdd
   languageName: node
   linkType: hard
 
