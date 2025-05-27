@@ -1,23 +1,22 @@
+import { inject } from "inversify";
 import { EmitFiveMinuteTickCommand } from "../../Application/Commands/EmitFiveMinuteTickCommand";
-import { EmitFiveMinuteTickHandler } from "../../Application/Handlers/EmitFiveMinuteTickHandler";
 import { FiveMinuteTickPublisherContract } from "../../Domain/Contracts/FiveMinuteTickPublisherContract";
+import { ICommandBus, TYPES } from "contracts.ts";
 import { ClockId } from "../../Domain/ValueObjects/ClockId";
 
 export class ClockScheduler implements FiveMinuteTickPublisherContract {
   private readonly intervalMillis = 5 * 60 * 1000; // 5 minutes
 
   constructor(
-    private readonly handler: EmitFiveMinuteTickHandler,
+    @inject(TYPES.CommandBus) private readonly commandBus: ICommandBus,
     private readonly clockId: ClockId
   ) {}
 
   public async start(): Promise<void> {
-    // Immediate tick
-    this.handler.execute(new EmitFiveMinuteTickCommand(this.clockId.toString()));
+    await this.commandBus.dispatch(new EmitFiveMinuteTickCommand(this.clockId));
 
-    // Recurring tick
-    setInterval(() => {
-      this.handler.execute(new EmitFiveMinuteTickCommand(this.clockId.toString()));
+    setInterval(async () => {
+      await this.commandBus.dispatch(new EmitFiveMinuteTickCommand(this.clockId));
     }, this.intervalMillis);
   }
 }
