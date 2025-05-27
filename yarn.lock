@@ -126,14 +126,14 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=b601f4b6238336a17d5fa15e59c1447764f480da"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=01e911f37c0b67edbb2d7c081b15ae1120f0169c"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
     kernel.ts: "github:qtvhao/kernel.ts"
     reflect-metadata: ^0.2.2
-  checksum: 7881f16f80d50de860689fca94931e95a6bc3a5f3c78be7157817b6b8f4da7ac8d0aa9d17313e285a0874feadffffd8893a691c25e42156a36910715c5282394
+  checksum: e51d06178ceccfcc5af3b1a512a4e8bac610332f1b2b35df7e1416ed68c0494a9b2e1642b1d71be2d2c33ce2096e0ec7ea8ee22d374d97d30d1042cbedc02eb7
   languageName: node
   linkType: hard
 
