@@ -50,7 +50,7 @@ export class SystemClockServiceProvider extends ServiceProvider
             this.app.get(ClockEventHandler),
         );
         //
-        this.booting(() => {
+        this.booting(async () => {
             const mapper = this.app.get<IEventTopicMapper>(
                 TYPES.EventTopicMapper,
             );
@@ -69,15 +69,17 @@ export class SystemClockServiceProvider extends ServiceProvider
                     .eventName(),
                 new ClockDomainEventMapper(),
             );
-        });
 
-        this.booted(async () => {
-            await this.app.get<IEventBus>(TYPES.EventBus)?.subscribe<
+            await this.app.get<IEventBus>(TYPES.EventBus).subscribe<
                 FiveMinuteTickOccurredEvent
             >(
                 FiveMinuteTickOccurredEvent,
                 new ClockEventHandler(),
             );
+        });
+
+        this.booted(async () => {
+            await this.app.get<IEventBus>(TYPES.EventBus).start();
             const scheduler = this.app.get<FiveMinuteTickPublisherContract>(
                 SYSTEM_CLOCK_TYPES.ClockScheduler,
             );
