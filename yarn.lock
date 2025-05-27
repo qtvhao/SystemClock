@@ -81,14 +81,14 @@ __metadata:
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=c8ef366c8f584995cce1a3f70ed356acd43ffb37"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=2d492c9f592d65aea5a3345cfad8cefe75951a3c"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
     kernel.ts: "github:qtvhao/kernel.ts"
     reflect-metadata: ^0.2.2
     support.ts: "github:qtvhao/support.ts"
-  checksum: 9febdb2d863e09504b8c4db433f1f5161efa6f15667cb1bee5a4b1d0ebeb1de2602ea17e41b08adab97d72f20bc85e9059a9fc9b4b2beb0bb6797d934e76b3cf
+  checksum: 3e100bb99b220df3d46b2fd73adaad27617247a4075a89b07bcf135b1b4992c3b82926c7fd2d74547a9365badc71fb9f149b7cf51931dde2b942aea3abf92429
   languageName: node
   linkType: hard
 
@@ -114,7 +114,7 @@ __metadata:
 
 "kernel.ts@github:qtvhao/kernel.ts":
   version: 1.0.0
-  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=e596fc17bb998f5514682957b8bad1f6e6828d5c"
+  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=76051f54c4425053006b82978abfbecc45f57513"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     dotenv: ^16.5.0
@@ -126,7 +126,7 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=253c63a9dfcc3aea68410ed281eb999111c38f11"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=c0938eb92818407eabfd59540b6c48d3365483b3"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
@@ -144,7 +144,7 @@ __metadata:
 
 "support.ts@github:qtvhao/support.ts":
   version: 1.0.0
-  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=596244d7c87cd605465eb8c5186b792101dc49fd"
+  resolution: "support.ts@https://github.com/qtvhao/support.ts.git#commit=25571f748ee27a3b65d2a1d9b4620e35acd85800"
   dependencies:
     contracts.ts: "github:qtvhao/Contracts.ts"
     inversify: ^7.5.1
