@@ -81,14 +81,14 @@ __metadata:
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=8f07da65b0fd617c821e4f11ebe937b014a775f2"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=50ae9160e0e02dfb59e7102a931630652601e71f"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
     kernel.ts: "github:qtvhao/kernel.ts"
     reflect-metadata: ^0.2.2
     support.ts: "github:qtvhao/support.ts"
-  checksum: 3e100bb99b220df3d46b2fd73adaad27617247a4075a89b07bcf135b1b4992c3b82926c7fd2d74547a9365badc71fb9f149b7cf51931dde2b942aea3abf92429
+  checksum: 613e30a66b294f5b32842430318ff772d9194277c81f4b799454749479b184f8728542a0cc528d1b3881d6e860916d7caceed2c449f56354ab393ec5d63f5e13
   languageName: node
   linkType: hard
 
@@ -126,12 +126,14 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=385cb6ae8d4e451a82da8c600f4d700d4232fd31"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=9dee1afb3a55e987660aebe46a40a04b2593d318"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
+    inversify: ^7.5.1
     kernel.ts: "github:qtvhao/kernel.ts"
-  checksum: e11836ac1817ffbee4f57261b22803aa1884824b067f4aef1cb4745299a75c2551367b7e7c2b527081d4da5c566f2c85600b5a62633e732ed88df3ff2df88487
+    reflect-metadata: ^0.2.2
+  checksum: 0c463a6f9b0d405ef801dee0d15bc939675c04bc4259da5ea9763ff7f55054ddb812e1fabc1e350f2d214b76066e7509b8d194583ba6f4e884896dc5990af800
   languageName: node
   linkType: hard
 
