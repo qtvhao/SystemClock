@@ -1,18 +1,20 @@
-import { IEventBus } from "contracts.ts";
+import { ICommandHandler, IDomainEvent, IEventBus } from "contracts.ts";
 import { EmitFiveMinuteTickCommand } from "../Commands/EmitFiveMinuteTickCommand";
-import { ClockId } from "../../Domain/ValueObjects/ClockId";
 import { Clock } from "../../Domain/Entities/Clock";
 
-export class EmitFiveMinuteTickHandler {
+export class EmitFiveMinuteTickHandler implements ICommandHandler<EmitFiveMinuteTickCommand> {
     constructor(private readonly eventBus: IEventBus) {}
 
-    public async execute(command: EmitFiveMinuteTickCommand): Promise<void> {
-        const clockId = new ClockId(command.clockId);
+    public async handle(command: EmitFiveMinuteTickCommand): Promise<void> {
+        const clockId = command.clockId;
         const clock = new Clock(clockId);
 
         clock.tick();
 
         const domainEvents = clock.pullDomainEvents();
         await this.eventBus.publish(domainEvents);
+    }
+    getPublishedEvents(): ReadonlyArray<IDomainEvent> {
+        return [];
     }
 }

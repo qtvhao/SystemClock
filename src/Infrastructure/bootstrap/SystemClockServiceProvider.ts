@@ -44,7 +44,12 @@ export class SystemClockServiceProvider extends ServiceProvider
                 return new ClockScheduler(commandBus, defaultClockId);
             }).inSingletonScope();
         //
-        this.app.get<ICommandHandlerResolver>(TYPES.CommandHandlerResolver).register(EmitFiveMinuteTickCommand, new EmitFiveMinuteTickHandler)
+        this.app.bind(EmitFiveMinuteTickHandler).toSelf();
+        this.app.get<ICommandHandlerResolver>(TYPES.CommandHandlerResolver)
+            .register(
+                EmitFiveMinuteTickCommand,
+                this.app.get(EmitFiveMinuteTickHandler),
+            );
         const scheduler = this.app.get<FiveMinuteTickPublisherContract>(
             SYSTEM_CLOCK_TYPES.ClockScheduler,
         );
