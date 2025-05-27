@@ -1,5 +1,7 @@
 import {
     EventConstructor,
+    ICommandBus,
+    ICommandHandlerResolver,
     IDomainEvent,
     IDomainEventMapperRegistry,
     IEventBus,
@@ -10,12 +12,15 @@ import {
     Message,
     TYPES,
 } from "contracts.ts";
+import { TYPES as SYSTEM_CLOCK_TYPES } from "./types.0";
 import { ClockScheduler } from "./ClockScheduler";
 import { ClockId } from "../../Domain/ValueObjects/ClockId";
 import { EmitFiveMinuteTickHandler } from "../../Application/Handlers/EmitFiveMinuteTickHandler";
 import { ServiceProvider } from "support.ts";
 import { FiveMinuteTickOccurredEvent } from "../../Domain/Events/FiveMinuteTickOccurredEvent";
 import { ClockDomainEventMapper } from "../../Application/Handlers/Events/ClockDomainEventMapper";
+import { FiveMinuteTickPublisherContract } from "../../Domain/Contracts/FiveMinuteTickPublisherContract";
+import { EmitFiveMinuteTickCommand } from "../../Application/Commands/EmitFiveMinuteTickCommand";
 
 class ClockEventHandler implements IEventHandler<FiveMinuteTickOccurredEvent> {
     async handle(event: FiveMinuteTickOccurredEvent): Promise<void> {
@@ -30,16 +35,27 @@ class ClockEventHandler implements IEventHandler<FiveMinuteTickOccurredEvent> {
 export class SystemClockServiceProvider extends ServiceProvider
     implements IServiceProvider {
     public register(): void {
-        const clockId = new ClockId();
-        const handler = new EmitFiveMinuteTickHandler(
-            this.app.get<IEventBus>(TYPES.EventBus),
+        const defaultClockId = new ClockId("SYSTEM");
+        this.app.bind<FiveMinuteTickPublisherContract>(
+            SYSTEM_CLOCK_TYPES.ClockScheduler,
+        )
+            .toDynamicValue(() => {
+                const commandBus = this.app.get<ICommandBus>(TYPES.CommandBus);
+                return new ClockScheduler(commandBus, defaultClockId);
+            }).inSingletonScope();
+        //
+        this.app.get<ICommandHandlerResolver>(TYPES.CommandHandlerResolver).register(EmitFiveMinuteTickCommand, new EmitFiveMinuteTickHandler)
+        const scheduler = this.app.get<FiveMinuteTickPublisherContract>(
+            SYSTEM_CLOCK_TYPES.ClockScheduler,
         );
-        const scheduler = new ClockScheduler(handler, clockId);
         //
         const eventHandlerResolver = this.app.get<IEventHandlerResolver>(
-          TYPES.EventHandlerResolver,
+            TYPES.EventHandlerResolver,
         );
-        eventHandlerResolver.register(FiveMinuteTickOccurredEvent, new ClockEventHandler());
+        eventHandlerResolver.register(
+            FiveMinuteTickOccurredEvent,
+            new ClockEventHandler(),
+        );
         //
 
         this.booted(async () => {
@@ -56,7 +72,10 @@ export class SystemClockServiceProvider extends ServiceProvider
             const mapper = this.app.get<IEventTopicMapper>(
                 TYPES.EventTopicMapper,
             );
-            mapper.register("clock.fiveMinuteTick", FiveMinuteTickOccurredEvent);
+            mapper.register(
+                "clock.fiveMinuteTick",
+                FiveMinuteTickOccurredEvent,
+            );
 
             const domainEventMapperRegistry = this.app.get<
                 IDomainEventMapperRegistry<IDomainEvent, Message>
