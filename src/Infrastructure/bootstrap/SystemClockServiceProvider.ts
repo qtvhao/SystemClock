@@ -1,11 +1,9 @@
 import {
-    EventConstructor,
     ICommandBus,
     ICommandHandlerResolver,
     IDomainEvent,
     IDomainEventMapperRegistry,
     IEventBus,
-    IEventHandler,
     IEventHandlerResolver,
     IEventTopicMapper,
     IServiceProvider,
@@ -51,31 +49,9 @@ export class SystemClockServiceProvider extends ServiceProvider
         );
         //
         this.booting(async () => {
-            const mapper = this.app.get<IEventTopicMapper>(
-                TYPES.EventTopicMapper,
-            );
-            mapper.register(
-                "clock.fiveMinuteTick",
-                FiveMinuteTickOccurredEvent,
-            );
-
-            const domainEventMapperRegistry = this.app.get<
-                IDomainEventMapperRegistry<IDomainEvent, Message>
-            >(
-                TYPES.DomainEventMapperRegistry,
-            );
-            domainEventMapperRegistry.set(
-                new FiveMinuteTickOccurredEvent("aggr-id", new ClockId())
-                    .eventName(),
-                new ClockDomainEventMapper(),
-            );
-
-            await this.app.get<IEventBus>(TYPES.EventBus).subscribe<
-                FiveMinuteTickOccurredEvent
-            >(
-                FiveMinuteTickOccurredEvent,
-                new ClockEventHandler(),
-            );
+            await this.mapEventTopics();
+            await this.registerEventMappers();
+            await this.subscribeEventHandlers();
         });
 
         this.booted(async () => {
@@ -85,5 +61,28 @@ export class SystemClockServiceProvider extends ServiceProvider
             );
             await scheduler.start();
         });
+    }
+    private async mapEventTopics(): Promise<void> {
+        const mapper = this.app.get<IEventTopicMapper>(TYPES.EventTopicMapper);
+        mapper.register(
+            "clock.fiveMinuteTick",
+            FiveMinuteTickOccurredEvent,
+        );
+    }
+
+    private async registerEventMappers(): Promise<void> {
+        this.app.get<IDomainEventMapperRegistry<IDomainEvent, Message>>(
+            TYPES.DomainEventMapperRegistry,
+        ).set(
+            new FiveMinuteTickOccurredEvent("aggr-id", new ClockId()).eventName(),
+            new ClockDomainEventMapper(),
+        );
+    }
+
+    private async subscribeEventHandlers(): Promise<void> {
+        await this.app.get<IEventBus>(TYPES.EventBus).subscribe<FiveMinuteTickOccurredEvent>(
+            FiveMinuteTickOccurredEvent,
+            this.app.get(ClockEventHandler),
+        );
     }
 }
