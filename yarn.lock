@@ -81,7 +81,7 @@ __metadata:
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=2d492c9f592d65aea5a3345cfad8cefe75951a3c"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=8f07da65b0fd617c821e4f11ebe937b014a775f2"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
@@ -114,7 +114,7 @@ __metadata:
 
 "kernel.ts@github:qtvhao/kernel.ts":
   version: 1.0.0
-  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=76051f54c4425053006b82978abfbecc45f57513"
+  resolution: "kernel.ts@https://github.com/qtvhao/kernel.ts.git#commit=a54f17beb5f41cf7f33134df9c00ad278eb23036"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     dotenv: ^16.5.0
@@ -126,7 +126,7 @@ __metadata:
 
 "messaging.ts@github:qtvhao/messaging.ts":
   version: 1.0.0
-  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=c0938eb92818407eabfd59540b6c48d3365483b3"
+  resolution: "messaging.ts@https://github.com/qtvhao/messaging.ts.git#commit=385cb6ae8d4e451a82da8c600f4d700d4232fd31"
   dependencies:
     class-transformer: ^0.5.1
     contracts.ts: "github:qtvhao/contracts.ts"
