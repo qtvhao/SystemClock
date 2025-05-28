@@ -81,7 +81,7 @@ __metadata:
 
 "cqrs.ts@github:qtvhao/cqrs.ts":
   version: 1.0.0
-  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=50ae9160e0e02dfb59e7102a931630652601e71f"
+  resolution: "cqrs.ts@https://github.com/qtvhao/cqrs.ts.git#commit=bbf3692dfd1fcdf3de0ce6d555848b7dd54fdf33"
   dependencies:
     contracts.ts: "github:qtvhao/contracts.ts"
     inversify: ^7.5.1
