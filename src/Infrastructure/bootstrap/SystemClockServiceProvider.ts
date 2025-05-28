@@ -55,7 +55,6 @@ export class SystemClockServiceProvider extends ServiceProvider
         });
 
         this.booted(async () => {
-            await this.app.get<IEventBus>(TYPES.EventBus).start();
             const scheduler = this.app.get<FiveMinuteTickPublisherContract>(
                 SYSTEM_CLOCK_TYPES.ClockScheduler,
             );
