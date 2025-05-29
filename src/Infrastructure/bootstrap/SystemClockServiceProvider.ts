@@ -61,7 +61,8 @@ export class SystemClockServiceProvider extends ServiceProvider
             await scheduler.start();
         });
     }
-    private async mapEventTopics(): Promise<void> {
+
+    async mapEventTopics(): Promise<void> {
         const mapper = this.app.get<IEventTopicMapper>(TYPES.EventTopicMapper);
         mapper.register(
             "clock.fiveMinuteTick",
@@ -69,17 +70,19 @@ export class SystemClockServiceProvider extends ServiceProvider
         );
     }
 
-    private async registerEventMappers(): Promise<void> {
+    async registerEventMappers(): Promise<void> {
         this.app.get<IDomainEventMapperRegistry<IDomainEvent, Message>>(
             TYPES.DomainEventMapperRegistry,
         ).set(
-            new FiveMinuteTickOccurredEvent("aggr-id", new ClockId()).eventName(),
+            FiveMinuteTickOccurredEvent,
             new ClockDomainEventMapper(),
         );
     }
 
-    private async subscribeEventHandlers(): Promise<void> {
-        await this.app.get<IEventBus>(TYPES.EventBus).subscribe<FiveMinuteTickOccurredEvent>(
+    async subscribeEventHandlers(): Promise<void> {
+        await this.app.get<IEventBus>(TYPES.EventBus).subscribe<
+            FiveMinuteTickOccurredEvent
+        >(
             FiveMinuteTickOccurredEvent,
             this.app.get(ClockEventHandler),
         );

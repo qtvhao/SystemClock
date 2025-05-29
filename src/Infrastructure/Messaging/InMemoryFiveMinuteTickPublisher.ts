@@ -1,1 +1,0 @@
-// Implementation: publish event
